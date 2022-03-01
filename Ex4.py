@@ -42,18 +42,21 @@ class Root(Tk):
         for i in range(64):
             if pixels[i] != [0, 0, 0]:
                 p[i] = 1
-            else:
-                p[i] = 0
-        pixel = p.reshape(8,8)
+        else:
+            p[i] = 0
+        pixel = p.reshape(8, 8)
         for x in range(8):
             for y in range(8):
-                if pixel[x,y] == 1:
-                    self.buttons[y,x].config(bg='red', activebackground='red')
+                if pixel[x, y] == 1:
+                    self.buttons[y, x].config(bg='red',
+                                              activebackground='red')
                 else:
-                    self.buttons[y,x].config(bg='#d9d9d9', activebackground='#d9d9d9')
+                    self.buttons[y, x].config(bg='#d9d9d9',
+                                              activebackground='#d9d9d9')
         self.after(300, self.readpixel)
 
     def clear(self):
+        global a
         a = np.zeros([8,8])
         for x in range(8):
             for y in range(8):
