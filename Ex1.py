@@ -25,7 +25,7 @@ class Root(Tk):
         self.temp_label.grid(row=1,column=0,pady=10)
         self.temp_text = Text(self, height=1, width=10)
         self.temp_text.grid(row=1, column=1, pady=10)
-        temp = str(self.sensing.getTemp()*(9/5)+32) + self.temp_units[0]
+        self.temp = str(self.sensing.getTemp()*(9/5)+32) + self.temp_units[0]
         self.temp_text.insert(END, temp)
         # display pressure
         self.pressure_label = Label(self, text="Pressure: ")
@@ -46,9 +46,9 @@ class Root(Tk):
         self.update_humidity()
 
     def update_temp(self):
-        temp = str(round(self.sensing.getTemp()*(9/5)+32, 2)) + " F"
+        self.temp = str(round(self.sensing.getTemp()*(9/5)+32, 2)) + " F"
         self.temp_text.delete("1.0", END)
-        self.temp_text.insert(END, temp)
+        self.temp_text.insert(END, self.temp)
         self.after(5000, self.update_temp)
 
     def update_pressure(self):
