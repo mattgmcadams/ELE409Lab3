@@ -46,6 +46,7 @@ class Root(Tk):
         plt.subplots_adjust(bottom=.30)
         plt.title('Temperature Variation')
         plt.ylabel('Temperature')
+        plt.ylim((0, 40))
         self.canvas.draw()
         self.after(1000, self.update_fig)
 
