@@ -17,13 +17,15 @@ class Root(Tk):
         self.buttons = {}
         for x in range(8):
             for y in range(8):
-                handler = lambda x=x,y=y: self.led(x,y)
-                self.button = Button(self, command=handler, width=1, height=1, activebackground='#d9d9d9')
+                handler = lambda x=x, y=y: self.led(x, y)
+                self.button = Button(self, command=handler,
+                                     width=1, height=1, activebackground='#d9d9d9')
                 self.button.grid(row=y, column=x)
-                self.buttons[x,y] = self.button
-            self.clear = Button(self, text="Reset", command=self.clear)
-            self.clear.grid(row=8, column=3, columnspan=2)
-            self.readpixel()
+                self.buttons[x, y] = self.button
+        self.clear = Button(self, text="Reset",
+                            command=self.clear)
+        self.clear.grid(row=8, column=3, columnspan=2)
+        self.readpixel()
 
     def led(self, x, y):
         global a
