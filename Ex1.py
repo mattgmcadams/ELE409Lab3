@@ -43,7 +43,7 @@ class Root(Tk):
         self.humidity_text.insert(END, humidity)
         self.temp_button = Button(self, text="Convert to F",
                               command=self.convert_temp)
-        self.temp_button.grid(row=4, column=0, ypad=10)
+        self.temp_button.grid(row=4, column=0, pady=10)
         self.update_temp()
         self.update_pressure()
         self.update_humidity()
