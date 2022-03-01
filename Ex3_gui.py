@@ -44,10 +44,10 @@ class Root(Tk):
 
         plt.xticks(rotation=45, ha='right')
         plt.subplots_adjust(bottom=.30)
-        plt.title('Gaussian Variables')
-        plt.ylabel('Gaussian Value')
+        plt.title('Temperature Variation')
+        plt.ylabel('Temperature')
         self.canvas.draw()
-        self.after(1000, self.update_fig())
+        self.after(1000, self.update_fig)
 
 root = Root()
 root.mainloop()
