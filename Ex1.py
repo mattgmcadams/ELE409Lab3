@@ -12,7 +12,7 @@ class getSense(object):
 class Root(Tk):
     def __init__(self):
         super(Root,self).__init__()
-        self.temp_units = [' C', ' F']
+        self.temp_units = 'C'
         self.humidity_unit = '%'
         self.pressure_unit = ' hPa'
         self.title("Temperature")
@@ -26,7 +26,7 @@ class Root(Tk):
         self.temp_text = Text(self, height=1, width=10)
         self.temp_text.grid(row=1, column=1, pady=10)
         self.temp = str(self.sensing.getTemp()*(9/5)+32) + self.temp_units[0]
-        self.temp_text.insert(END, temp)
+        self.temp_text.insert(END, self.temp)
         # display pressure
         self.pressure_label = Label(self, text="Pressure: ")
         self.pressure_label.grid(row=2, column=0, pady=10)
@@ -41,12 +41,17 @@ class Root(Tk):
         self.humidity_text.grid(row=3, column=1, pady=10)
         humidity = str(self.sensing.getHum()) + self.humidity_unit
         self.humidity_text.insert(END, humidity)
+        self.temp_button = Button(self, text="Convert temp",
+                              command=self.convert_temp)
         self.update_temp()
         self.update_pressure()
         self.update_humidity()
 
     def update_temp(self):
-        self.temp = str(round(self.sensing.getTemp()*(9/5)+32, 2)) + " F"
+        if self.temp_units == 'C':
+            self.temp = str(round(self.sensing.getTemp(), 2)) + " C"
+        else:
+            self.temp = str(round(self.sensing.getTemp()*(9/5)+32, 2)) + " F"
         self.temp_text.delete("1.0", END)
         self.temp_text.insert(END, self.temp)
         self.after(5000, self.update_temp)
@@ -63,6 +68,12 @@ class Root(Tk):
         self.humidity_text.insert(END, humidity)
         self.after(5000, self.update_humidity)
 
+    def convert_temp(self):
+        self.temp_units = 'F'
+        self.temp = str(round(self.sensing.getTemp()*(9/5)+32, 2)) + " F"
+        self.temp_text.delete("1.0", END)
+        self.temp_text.insert(END, self.temp)
+        self.after(5000, self.update_temp)
 
 root = Root()
 
