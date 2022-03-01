@@ -27,14 +27,17 @@ class Root(Tk):
 
     def led(self, x, y):
         global a
-        if a[x,y] == 0:
-            sense.set_pixel(x,y,R)
-            self.buttons[x,y].config(bg='red', activebackground='red')
-            a[x,y] = 1
+        if a[x, y] == 0:
+            sense.set_pixel(x, y, R)
+            self.buttons[x, y].config(bg='red',
+                                      activebackground='red')
+            a[x, y] = 1
         else:
             sense.set_pixel(x, y, (0, 0, 0))
-            self.buttons[x,y].config(bg='#d9d9d9', activebackground='#d9d9d9')
+            self.buttons[x, y].config(bg='#d9d9d9',
+                                      activebackground='#d9d9d9')
             a[x,y] = 0
+
 
     def readpixel(self):
         global p
@@ -43,7 +46,7 @@ class Root(Tk):
             if pixels[i] != [0, 0, 0]:
                 p[i] = 1
         else:
-            p[i] = 0
+            p[i] = 1
         pixel = p.reshape(8, 8)
         for x in range(8):
             for y in range(8):
