@@ -30,7 +30,7 @@ class Root(Tk):
 
     def update_fig(self):
         global xs, ys
-        g = self.gaussian.getGaussian()
+        g = self.gaussian.getTemperature()
         t = self.gaussian.getTime()
         # Add time and gaussian value to lists
         xs.append(t)
