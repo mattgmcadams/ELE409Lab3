@@ -82,7 +82,7 @@ class Root(Tk):
         self.temp = str(round(self.sensing.getTemp(), 2)) + " C"
         self.temp_text.delete("1.0", END)
         self.temp_text.insert(END, self.temp)
-        self.temp_button = Button(self, text="Convert to F", command=self.convert_back)
+        self.temp_button = Button(self, text="Convert to F", command=self.convert_temp)
         self.after(5000, self.update_temp)
 
 root = Root()
