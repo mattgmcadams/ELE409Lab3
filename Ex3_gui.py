@@ -21,12 +21,16 @@ class getData(object):
 class Root(Tk):
     def __init__(self):
         super(Root, self).__init__()
+        self.display_chart = False
+        
         self.title("Tkinter Embedding Matplotlib")
-        self.geometry("720x480")
+        self.geometry("600x500")
         self.gaussian = getData()
+        self.button1 = Button(self, text="Display",
+                              command=self.display)
+        self.button1.grid(row=0, column=0, padx=50)
         self.canvas = FigureCanvasTkAgg(f, self)
-        self.canvas.get_tk_widget().pack(side="bottom", fill="both", expand=True)
-        self.update_fig()
+        # self.canvas.get_tk_widget().grid(row=1, column=0, pady=10)
 
     def update_fig(self):
         global xs, ys
@@ -48,7 +52,36 @@ class Root(Tk):
         plt.ylabel('Temperature')
         plt.ylim((30, 40))
         self.canvas.draw()
-        self.after(1000, self.update_fig)
+        if self.display_chart:
+            self.after(1000, self.update_fig)
+
+    def display(self):
+        self.display_chart = True
+        self.canvas = FigureCanvasTkAgg(f, self)
+        self.canvas.get_tk_widget().grid(row=1, column=0, pady=10, columnspan=10)
+        self.button1.destroy()
+        self.button1 = Button(self, text="undisplay",
+                              command=self.undisplay)
+        self.button1.grid(row=0, column=0, padx=50)
+        self.update_fig()
+
+    def undisplay(self):
+        global xs, ys
+        self.display_chart = False
+        self.canvas.get_tk_widget().destroy()
+        xs = []
+        ys = []
+        ax.clear()
+        # ax.plot(xs, ys)
+        # self.canvas.draw()
+
+        self.button1.destroy()
+        self.button1 = Button(self, text="Display",
+              command=self.display)
+        self.button1.grid(row=0, column=0, padx=50)
+
+
+
 
 root = Root()
 root.mainloop()

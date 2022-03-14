@@ -4,6 +4,7 @@ import matplotlib.animation as animation
 import datetime as dt
 import numpy as np
 
+
 # Create figure for plotting
 fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1)
